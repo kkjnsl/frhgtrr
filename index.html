@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MARVEL Heroes and Villains</title>
+  <style>
+    body {
+      background-image: url("https://i.pinimg.com/564x/e1/8b/10/e18b10f04e953d9b4a1f41e192864126.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .container {
+      display: flex;
+      margin: 20px;
+    }
+    .section {
+      flex: 1;
+      margin: 10px;
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    .section h2 {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+      text-align: center;
+    }
+    .character {
+      text-align: center;
+      display: inline-block;
+      margin: 10px;
+    }
+    .character img {
+      width: 100px;
+      height: 100px;
+    }
+    .hero-name, .villain-name {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .row {
+      text-align: center;
+    }
+    .row::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    .row .character {
+      width: calc(33.33% - 20px);
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="section">
+      <h2>Popular Heroes</h2>
+      <div id="heroesTable" class="row">
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Popular Villains</h2>
+      <div id="villainsTable" class="row">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const charactersData = [
+      { name: "THOR", image: "https://i.pinimg.com/736x/5b/f4/a9/5bf4a989ac96489a138b7f2dc223ebd0.jpg", alignment: "Hero" },
+      { name: "IRON MAN", image: "https://i.pinimg.com/550x/5d/d2/c8/5dd2c8f82ef46e0db3fe07a6e3285c2f.jpg", alignment: "Hero" },
+      { name: "HULK", image: "https://i.pinimg.com/736x/80/08/1a/80081a2c9fe5b02a86c187351e73a493.jpg", alignment: "Hero" },
+      { name: "CAPTIAN AMERICA", image: "https://i.pinimg.com/550x/97/bf/27/97bf27becd0df4ff387b882572925416.jpg", alignment: "Hero" },
+      { name: "THANOS", image: "https://i.pinimg.com/236x/ed/cf/24/edcf24fd03bb859014359527d59eae4d.jpg", alignment: "Villain" },
+      { name: "ULTRON", image: "https://i.pinimg.com/474x/d4/91/fe/d491fe179674032fb183e1e5213ac60e.jpg", alignment: "Villain" },
+      { name: "LOKI", image: "https://i.pinimg.com/736x/27/9e/f5/279ef54a7bd7758d14c0f617533887c1.jpg", alignment: "Villain" },
+      { name: "KANG", image: "https://i.pinimg.com/1200x/79/ff/01/79ff01ee70d03f31f1c2066534d77dfa.jpg", alignment: "Villain" }
+    ];
+
+    function createCharacterCard(character, containerId) {
+      const container = document.getElementById(containerId);
+
+      const characterDiv = document.createElement("div");
+      characterDiv.classList.add("character");
+
+      const characterImage = document.createElement("img");
+      characterImage.src = character.image;
+      characterImage.classList.add(character.alignment.toLowerCase() + '-img');
+
+      const characterName = document.createElement("div");
+      characterName.classList.add(character.alignment.toLowerCase() + '-name');
+      characterName.textContent = character.name;
+
+      characterDiv.appendChild(characterImage);
+      characterDiv.appendChild(characterName);
+
+      container.appendChild(characterDiv);
+    }
+
+    const heroesTable = document.getElementById("heroesTable");
+    const villainsTable = document.getElementById("villainsTable");
+
+    charactersData.forEach(character => {
+      const containerId = character.alignment === "Hero" ? "heroesTable" : "villainsTable";
+      createCharacterCard(character, containerId);
+    });
+  </script>
+</body>
+</html>
+
